@@ -5,7 +5,7 @@ const app = express();
 var bodyParser = require('body-parser');
 
 //Conexion a la base de datos
-mongoose.connect('mongodb://localhost/contagiados', 
+mongoose.connect('mongodb://localhost/proyecto', 
 { useNewUrlParser: true,  useUnifiedTopology: true },)
     .then(db => console.log('MongoDB conectada'))
     .catch(err => console.log(err));

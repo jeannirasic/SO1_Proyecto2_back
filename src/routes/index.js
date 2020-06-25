@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Tasks = require('../models/task');
+const Proyecto = require('../models/proyecto');
 const redis = require('redis');
 
 //Conexion con redis
-let client = redis.createClient(/*{
-  port      : 6379,               // replace with your port
-  host      : '34.67.42.245'        // replace with your hostanme or IP address
-}*/);
+let client = redis.createClient({
+  port      : 6379,               
+  host      : '34.67.42.245'        
+});
 
 client.on('connect', function(){
   console.log('Redis conectada');
@@ -23,34 +23,33 @@ router.get('/', (req, res) => {
 
 //Funcion de obtener usuarios en mongodb
 router.route('/usuarios').get(function(req, res) {
-    Tasks.find(function(err, tasks) {
+    Proyecto.find(function(err, proyecto) {
     if (err){
       res.send(err);
     }
-    res.json(tasks);
+    res.json(proyecto);
   });
 });
 
 //Funcion de obtener departamentos en mongodb
 router.route('/departamentos').get(function(req, res) {
-    Tasks.find({}, 'Departamento', function(err, tasks) {
+    Proyecto.find({}, 'Departamento', function(err, proyecto) {
     if (err){
       res.send(err);
     }
-    res.json(tasks);
+    res.json(proyecto);
   });
 });
 
 //Funcion de insertar usuarios en mongodb
 router.route('/mongoUsuarios').post(function(req, res) {
-    var task = new Tasks(); 
-    task.Nombre = req.body.Nombre; 
-    task.Departamento = req.body.Departamento;
-    task.Edad = req.body.Edad;
-    task.Forma = req.body.Forma;
-    task.Estado = req.body.Estado;
-    console.log(task);
-    task.save(function(err) {
+    var proyecto = new Proyecto(); 
+    proyecto.Nombre = req.body.Nombre; 
+    proyecto.Departamento = req.body.Departamento;
+    proyecto.Edad = req.body.Edad;
+    proyecto.Forma = req.body.Forma;
+    proyecto.Estado = req.body.Estado;
+    proyecto.save(function(err) {
       if (err){ 
         res.send(err);
       }

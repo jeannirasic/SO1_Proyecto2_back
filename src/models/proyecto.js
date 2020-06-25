@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
+const ProyectoSchema = new Schema({
     Nombre: String,
     Departamento: String,
     Edad: Number,
@@ -9,4 +9,4 @@ const TaskSchema = new Schema({
     Estado: String
 });
 
-module.exports = mongoose.model('tasks',TaskSchema);
+module.exports = mongoose.model('proyecto',ProyectoSchema);
