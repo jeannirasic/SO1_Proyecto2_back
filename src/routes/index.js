@@ -6,7 +6,7 @@ const redis = require('redis');
 //Conexion con redis
 let client = redis.createClient({
   port      : 6379,               
-  host      : '34.67.42.245'        
+  host      : 'www.redissopes.tk'        
 });
 
 client.on('connect', function(){
@@ -93,7 +93,6 @@ router.route('/edades/:Id').get(function(req, res){
     }
   });
 });
-
 
 //Funcion de insertar usuarios redis
 router.route('/redisUsuarios').post(function(req, res) {
