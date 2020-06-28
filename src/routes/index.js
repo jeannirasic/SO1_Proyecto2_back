@@ -69,15 +69,16 @@ router.route('/claves').get(function(req, res){
   });
 });
 
-
 //Funcion de obtener ultimo usuario redis
 router.route('/ultimoCaso/:Id').get(function(req, res){
   let Id = req.params.Id;
-  client.hgetall(Id, function(err, obj){
+  client.get(Id, function(err, obj){
     if(!obj){
       res.send(err);
     }else{
-      res.json(obj);
+      var str = obj.toString();
+      str=str.replace(/'/g,`"`);
+      res.json(JSON.parse(str));
     }
   });
 });
@@ -85,11 +86,15 @@ router.route('/ultimoCaso/:Id').get(function(req, res){
 //Funcion de obtener edades redis
 router.route('/edades/:Id').get(function(req, res){
   let Id = req.params.Id;
-  client.hget(Id, 'Edad', function(err, obj){
+  client.get(Id, function(err, obj){
     if(!obj){
       res.send(err);
     }else{
-      res.json(obj);
+      var str = obj.toString();
+      str=str.replace(/'/g,`"`);
+      var js = JSON.parse(str);
+      var edad = js.Edad;
+      res.json(edad);
     }
   });
 });
